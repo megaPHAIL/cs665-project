@@ -85,10 +85,10 @@ public class DatabaseInterface {
 				return;
 			}
 			
-			System.out.format("%-4s  %-10s  %-20s  %n", "ID", "Name", "Description");
+			System.out.format("%-4s  %-20s  %-20s  %n", "ID", "Name", "Description");
 
 			while (rs.next()) {
-				System.out.format("%-4d  %-10s  %-20s  %n", rs.getInt("PID"), rs.getString("Name"), rs.getString("Description"));
+				System.out.format("%-4d  %-20s  %-20s  %n", rs.getInt("PID"), rs.getString("Name"), rs.getString("Description"));
 			}
 			rs.close();
 		} catch (SQLException e) {
