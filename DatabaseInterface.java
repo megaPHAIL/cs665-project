@@ -112,7 +112,7 @@ public class DatabaseInterface {
 			System.out.format("%-4s  %-10s  %-10s  %n", "ID", "Name", "Start");
 
 			while (rs.next()) 
-				System.out.format("%-4d  %-10s  %-tD  %n", rs.getInt("EvID"), rs.getString("Name"), rs.getDate("StartTime"));
+				System.out.format("%-4d  %-10s  %-10tD  %n", rs.getInt("EvID"), rs.getString("Name"), rs.getDate("StartTime"));
 			
 			rs.close();
 		} catch (SQLException e) {
