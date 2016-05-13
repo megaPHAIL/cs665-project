@@ -62,7 +62,7 @@ public class DatabaseInterface {
 				input.nextLine();
 				name = input.nextLine();
 
-				qry = "select p.* "
+				qry = "select distinct p.* "
 					+ "from ORGANIZATION o, DEPARTMENT d, EMPLOYEE e, TASK t, PROJECT p "
 					+ "where o.OID = d.OrgID and d.DID = e.DeptID and e.EID = t.EmpID and t.ProjID = p.PID "
 					+ "and o.Name = '" + name + "'";
@@ -73,7 +73,7 @@ public class DatabaseInterface {
 				System.out.print("Enter an employee's last name: ");
 				name = input.next();
 
-				qry = "select p.* "
+				qry = "select distinct p.* "
 					+ "from EMPLOYEE e, TASK t, PROJECT p "
 					+ "where e.EID = t.EmpID and t.ProjID = p.PID "
 					+ "and e.LastName = '" + name + "'";
