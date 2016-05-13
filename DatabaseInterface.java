@@ -134,13 +134,11 @@ public class DatabaseInterface {
 						+ "order by Average";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-10s  %4s  %n", "Department", "Average");
+			System.out.format("%-4s  %-10s  %-10s  %-4s  %n", "ID", "First", "Last", "Average");
 
-			while (rs.next()) {
-				int id = rs.getInt("DID");
-				String dname = rs.getString("Name");
-				System.out.format("%4d  %-10s  %n", id, dname);
-			}
+			while (rs.next())
+				System.out.format("%-4d  %-10s  %-10s  %-4d  %n", rs.getInt("EID"), rs.getString("FirstName"),
+						rs.getString("LastName"), rs.getInt("Average"));
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
