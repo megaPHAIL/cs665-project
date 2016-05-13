@@ -29,7 +29,7 @@ public class DatabaseInterface {
 		try {
 			String name;
 			System.out.print("Enter an organization name: ");
-			name = input.next();
+			name = input.nextLine();
 
 			String qry = " select d.* "
 						+ "from ORGANIZATION o, DEPARTMENT d "
@@ -59,7 +59,7 @@ public class DatabaseInterface {
 			switch (input.nextInt()) {
 			case 1:
 				System.out.print("Enter an organization name: ");
-				name = input.next();
+				name = input.nextLine();
 
 				qry = "select p.* "
 					+ "from ORGANIZATION o, DEPARTMENT d, EMPLOYEE e, TASK t, PROJECT p "
@@ -99,11 +99,11 @@ public class DatabaseInterface {
 		try {
 			String name;
 			System.out.print("Enter an employee's last name: ");
-			name = input.next();
+			name = input.nextLine();
 
 			String qry = " select v.* "
 						+ "from EMPLOYEE e, EVENT_ASSIGNMENT a, EVENT v "
-						+ "where e.EID = a.EmpID and a.EvID = v.EvID "
+						+ "where e.EID = a.EmployeeID and a.EventID = v.EvID "
 						+ "and e.LastName = '" + name + "'";
 			ResultSet rs = stmt.executeQuery(qry);
 
@@ -122,7 +122,7 @@ public class DatabaseInterface {
 		try {
 			String name;
 			System.out.print("Enter an organization name: ");
-			name = input.next();
+			name = input.nextLine();
 			
 			String qry = " select e.EID, e.FirstName, e.LastName, avg(t.HoursWorked) as Average "
 						+ "from ORGANIZATION o, DEPARTMENT d, EMPLOYEE e, TASK t "
@@ -149,7 +149,7 @@ public class DatabaseInterface {
 		try {
 			String name;
 			System.out.print("Enter a Departmant Name: ");
-			name = input.next();
+			name = input.nextLine();
 
 			String qry = " select avg(t.hoursworked) as Average "
 						+ "from department d, employee e, task t "
@@ -198,9 +198,9 @@ public class DatabaseInterface {
 		try {
 			String task;
 			System.out.print("Enter a Task Name: ");
-			task = input.next();
+			task = input.nextLine();
 
-			String qry = " select distinct(e.FirstName), e.LastName "
+			String qry = " select distinct e.FirstName, e.LastName "
 						+ "from employee e, task t "
 						+ "where t.name = '" + task + "' "
 						+ "and t.HoursWorked > t.HoursExpected";
@@ -223,7 +223,7 @@ public class DatabaseInterface {
 		try {
 			String project;
 			System.out.print("Enter a Project: ");
-			project = input.next();
+			project = input.nextLine();
 
 			String qry = " select sum(t.HoursWorked) as TotalTime "
 						+ "from task t, project p "
@@ -246,6 +246,7 @@ public class DatabaseInterface {
 	
 	public void disconnect() {
 		try {
+			input.close();
 			if (conn != null)
 				conn.close();
 		} catch (SQLException e) {
