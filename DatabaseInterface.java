@@ -58,6 +58,7 @@ public class DatabaseInterface {
 			System.out.println("2. Employee");
 			switch (input.nextInt()) {
 			case 1:
+				input.next();
 				System.out.print("Enter an organization name: ");
 				name = input.nextLine();
 
@@ -69,6 +70,7 @@ public class DatabaseInterface {
 				break;
 				
 			case 2:
+				input.next();
 				System.out.print("Enter an employee's last name: ");
 				name = input.next();
 
@@ -128,7 +130,7 @@ public class DatabaseInterface {
 						+ "from ORGANIZATION o, DEPARTMENT d, EMPLOYEE e, TASK t "
 						+ "where o.OID = d.OrgID and d.DID = e.DeptID and e.EID = t.EmpID and t.Complete = true "
 						+ "and o.Name = '" + name + "' "
-						+ "group by e.EID "
+						+ "group by e.EID, e.LastName, e.FirstName "
 						+ "order by Average";
 			ResultSet rs = stmt.executeQuery(qry);
 
