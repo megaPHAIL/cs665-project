@@ -58,8 +58,8 @@ public class DatabaseInterface {
 			System.out.println("2. Employee");
 			switch (input.nextInt()) {
 			case 1:
-				input.next();
 				System.out.print("Enter an organization name: ");
+				input.nextLine();
 				name = input.nextLine();
 
 				qry = "select p.* "
@@ -70,7 +70,6 @@ public class DatabaseInterface {
 				break;
 				
 			case 2:
-				input.next();
 				System.out.print("Enter an employee's last name: ");
 				name = input.next();
 
