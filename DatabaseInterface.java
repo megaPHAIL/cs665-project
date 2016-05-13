@@ -9,21 +9,20 @@ public class DatabaseInterface {
 	private Statement stmt;
 	
 	public DatabaseInterface() {
-		try {
-			// setup input scanner
-			input = new Scanner(System.in);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		input = new Scanner(System.in);
 	}
 	
 	public void connect() {
-		Driver d = new ClientDriver();
-		String url = "jdbc:derby://localhost:1674/taskdb;create=false";
-		conn = d.connect(url, null);
-		
-		// setup statement for executing queries
-		stmt = conn.createStatement();
+		try {
+			Driver d = new ClientDriver();
+			String url = "jdbc:derby://localhost:1674/taskdb;create=false";
+			conn = d.connect(url, null);
+
+			// setup statement for executing queries
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void departmentsByOrganization() {
