@@ -37,10 +37,10 @@ public class DatabaseInterface {
 						+ "and o.Name = '" + name + "'";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-4s  %10s  %n", "ID", "Name");
+			System.out.format("%-4s  %-10s  %n", "ID", "Name");
 
 			while (rs.next()) 
-				System.out.format("%-4d  %10s  %n", rs.getInt("DID"), rs.getString("Name"));
+				System.out.format("%-4d  %-10s  %n", rs.getInt("DID"), rs.getString("Name"));
 			
 			rs.close();
 		} catch (SQLException e) {
@@ -86,10 +86,10 @@ public class DatabaseInterface {
 				return;
 			}
 			
-			System.out.format("%-4s  %10s  %20s  %n", "ID", "Name", "Description");
+			System.out.format("%-4s  %-10s  %-20s  %n", "ID", "Name", "Description");
 
 			while (rs.next()) {
-				System.out.format("%-4d  %10s  %20s  %n", rs.getInt("PID"), rs.getString("Name"), rs.getString("Description"));
+				System.out.format("%-4d  %-10s  %-20s  %n", rs.getInt("PID"), rs.getString("Name"), rs.getString("Description"));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -109,10 +109,10 @@ public class DatabaseInterface {
 						+ "and e.LastName = '" + name + "'";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-4s  %10s  %10s  %n", "ID", "Name", "Start");
+			System.out.format("%-4s  %-10s  %-10s  %n", "ID", "Name", "Start");
 
 			while (rs.next()) 
-				System.out.format("%-4d  %10s  %tD  %n", rs.getInt("EvID"), rs.getString("Name"), rs.getDate("StartTime"));
+				System.out.format("%-4d  %-10s  %-tD  %n", rs.getInt("EvID"), rs.getString("Name"), rs.getDate("StartTime"));
 			
 			rs.close();
 		} catch (SQLException e) {
@@ -159,11 +159,11 @@ public class DatabaseInterface {
 						+ "and d.name = '" + name + "'";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-10s  %4s  %n", "Department", "Average");
+			System.out.format("%-10s  %-4s  %n", "Department", "Average");
 
 			while (rs.next()) {
 				int avg = rs.getInt("Average");
-				System.out.format("%-10s  %4d  %n", name, avg);
+				System.out.format("%-10s  %-4d  %n", name, avg);
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -173,20 +173,20 @@ public class DatabaseInterface {
 
 	public void employeeDeadlines() {
         try {
-			String qry = " select distinct(e.FirstName), e.LastName, t.Name "
+			String qry = " select distinct e.FirstName, e.LastName, t.Name "
 						+ "from employee e, task t"
 						+ " where t.empid = e.eid"
 						+ " and t.complete = true"
 						+ " and t.deadline >= {fn TIMESTAMPADD(SQL_TSI_HOUR, t.HoursWorked, T.AssignDate)}";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-10s  %4s  %-12s%n", "First Name", "Last Name", "Task Name");
+			System.out.format("%-10s  %-4s  %-10s%n", "First Name", "Last Name", "Task Name");
 
 			while (rs.next()) {
 				String fname = rs.getString("FIRSTNAME");
 				String lname = rs.getString("LASTNAME");
 				String tname = rs.getString("NAME");
-				System.out.format("%-10s  %4s  %10s%n", fname, lname, tname);
+				System.out.format("%-10s  %-4s  %-10s%n", fname, lname, tname);
 			}
 			rs.close();
         } catch (SQLException e) {
@@ -206,12 +206,12 @@ public class DatabaseInterface {
 						+ "and t.HoursWorked > t.HoursExpected";
 			ResultSet rs = stmt.executeQuery(qry);
 
-			System.out.format("%-10s  %4s%n", "First Name", "Last Name");
+			System.out.format("%-10s  %-4s%n", "First Name", "Last Name");
 
 			while (rs.next()) {
 				String fname = rs.getString("FirstName");
 				String lname = rs.getString("LastName");
-				System.out.format("%-10s  %4d  %n", fname, lname);
+				System.out.format("%-10s  %-4d  %n", fname, lname);
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -232,11 +232,11 @@ public class DatabaseInterface {
 			ResultSet rs = stmt.executeQuery(qry);
 
 			// Step 3: loop through the result set if the name can be found
-			System.out.format("%-10s  %4s%n", "Project Name", "Total Time Spent");
+			System.out.format("%-10s  %-4s%n", "Project Name", "Total Time Spent");
 
 			while (rs.next()) {
 				int totaltime = rs.getInt("TotalTime");
-				System.out.format("%-10s  %4d%n", project, totaltime);
+				System.out.format("%-10s  %-4d%n", project, totaltime);
 			}
 			rs.close();
 		} catch (SQLException e) {
